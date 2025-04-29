@@ -1,24 +1,37 @@
 'use client'
 
-import React from 'react'
-import Image from 'next/image'
+import React, { useEffect, useRef } from 'react'
 
 const AnimatedHeroBackground: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    // Asegurarse de que el video se reproduce automáticamente cuando está listo
+    if (videoRef.current) {
+      videoRef.current.play().catch(error => {
+        console.error("Error reproduciendo el video:", error)
+      })
+    }
+  }, [])
+
   return (
-    <div className="relative w-full h-full">
-      {/* Imagen de fondo estática */}
-      <div className="absolute inset-0">
-        <Image 
-          src="/image1.png" 
-          alt="TokeNatura Hero Background" 
-          fill
-          priority
-          className="object-cover object-center"
-          quality={100}
-        />
-        {/* Overlay para oscurecer ligeramente la imagen */}
-        <div className="absolute inset-0 bg-black/35"></div>
-      </div>
+    <div className="relative w-full h-full overflow-hidden">
+      {/* Video de fondo con reproducción automática en bucle */}
+      <video 
+        ref={videoRef}
+        className="absolute inset-0 w-full h-full object-cover"
+        autoPlay
+        loop
+        muted
+        playsInline
+      >
+        <source src="/video1.mp4" type="video/mp4" />
+        {/* Fallback por si el navegador no soporta el formato de video */}
+        Tu navegador no soporta videos HTML5.
+      </video>
+      
+      {/* Overlay para oscurecer ligeramente el video y mejorar la legibilidad del texto */}
+      <div className="absolute inset-0 bg-black/30"></div>
     </div>
   )
 }
