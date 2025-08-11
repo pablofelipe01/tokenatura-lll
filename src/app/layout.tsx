@@ -12,6 +12,9 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: 'TokeNatura - Tokenizando la biodiversidad',
   description: 'Biobanco especializado en la tokenización de activos, con enfoque en el mercado de la biodiversidad',
+  verification: {
+    google: 'TC5QlOXnQLsb48LTiehpEREvOKMP1WOgoE5b8l7ngtU',
+  },
 }
 
 export default function RootLayout({
